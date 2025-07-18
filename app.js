@@ -1,25 +1,16 @@
+require("./config/db");
 require('dotenv').config();
-const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("MongoDB connected!");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
 
 const express = require('express');
 const app = express();
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const Form = require('./models/form');
 const Response = require('./models/Response');
 const userModel = require("./models/user");
-
 const ADMIN_SECRET = process.env.ADMIN_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -101,7 +92,6 @@ app.get("/form/:id/responses", verifyToken, async (req, res) => {
   const form = await Form.findById(req.params.id);
   const responses = await Response.find({ formId: form._id });
 
-  
   const summary = form.questions.map((q, i) => {
     const count = responses.filter(r => r.answers[i] && r.answers[i].trim() !== "").length;
     return {

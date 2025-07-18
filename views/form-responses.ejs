@@ -3,42 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Responses - <%= form.title %></title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles/form-responses.css">
 </head>
-<body class="bg-gray-100 px-6 py-10">
-  <div class="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-    <h1 class="text-3xl font-bold text-indigo-700 mb-6 text-center">Responses for "<%= form.title %>"</h1>
+<body>
+  <div class="responses-container">
+    <h1 class="responses-title">Responses for "<%= form.title %>"</h1>
 
     <% if (responses.length === 0) { %>
-      <p class="text-gray-500 text-center">No one has submitted this form yet.</p>
+      <p class="no-responses">No one has submitted this form yet.</p>
     <% } else { %>
 
-      
-      <div class="flex justify-end mb-4">
-        <a href="/form/<%= form._id %>/export" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded shadow">
+      <div class="export-button-container">
+        <a href="/form/<%= form._id %>/export" class="export-button">
           ⬇️ Export to CSV
         </a>
       </div>
 
-      <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-300 border">
-          <thead class="bg-gray-50">
+      <div class="table-container">
+        <table class="response-table">
+          <thead>
             <tr>
-              <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">#</th>
+              <th>#</th>
               <% form.questions.forEach((q, i) => { %>
-                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Q<%= i+1 %>: <%= q %></th>
+                <th>Q<%= i+1 %>: <%= q %></th>
               <% }) %>
-              <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Submitted At</th>
+              <th>Submitted At</th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody>
             <% responses.forEach((res, index) => { %>
               <tr>
-                <td class="px-4 py-2 text-sm text-gray-700"><%= index + 1 %></td>
+                <td><%= index + 1 %></td>
                 <% res.answers.forEach((ans) => { %>
-                  <td class="px-4 py-2 text-sm text-gray-800"><%= ans %></td>
+                  <td><%= ans %></td>
                 <% }) %>
-                <td class="px-4 py-2 text-sm text-gray-500"><%= res.submittedAt.toLocaleString() %></td>
+                <td><%= res.submittedAt.toLocaleString() %></td>
               </tr>
             <% }) %>
           </tbody>
@@ -46,8 +45,8 @@
       </div>
     <% } %>
 
-    <div class="mt-8 text-center">
-      <a href="/dashboard" class="text-indigo-600 hover:underline">← Back to Dashboard</a>
+    <div class="back-link">
+      <a href="/dashboard">← Back to Dashboard</a>
     </div>
   </div>
 </body>

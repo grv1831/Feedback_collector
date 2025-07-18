@@ -1,0 +1,94 @@
+body {
+  background-color: #f3f4f6;
+  padding: 2.5rem 1.5rem;
+  font-family: sans-serif;
+  min-height: 100vh;
+}
+
+.responses-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.responses-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #4338ca;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.no-responses {
+  color: #6b7280;
+  text-align: center;
+}
+
+.export-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.export-button {
+  background-color: #22c55e;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.export-button:hover {
+  background-color: #16a34a;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.response-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+}
+
+.response-table thead {
+  background-color: #f9fafb;
+}
+
+.response-table th,
+.response-table td {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.response-table th {
+  font-weight: 600;
+  color: #374151;
+}
+
+.response-table td {
+  color: #374151;
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.back-link a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}

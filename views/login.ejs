@@ -4,37 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles/login.css">
 </head>
-<body class="bg-gray-100 font-sans min-h-screen flex flex-col items-center justify-center">
+<body>
 
-  <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-8 space-y-6">
-    <h2 class="text-2xl font-bold text-center text-purple-700">Admin Login</h2>
+  <div class="login-container">
+    <h2 class="login-title">Admin Login</h2>
 
-    <form action="/login" method="post" class="space-y-4">
-      <input
-        type="email"
-        placeholder="Email"
-        name="email"
-        required
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        required
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-      />
-      <input
-        type="submit"
-        value="Login"
-        class="w-full bg-purple-600 text-white font-semibold py-2 rounded-lg hover:bg-purple-700 transition"
-      />
+    <form action="/login" method="post" class="login-form">
+      <input type="email" placeholder="Email" name="email" required class="login-input" />
+      <input type="password" placeholder="Password" name="password" required class="login-input" />
+      <input type="submit" value="Login" class="login-button" />
     </form>
 
-    <div class="text-sm text-purple-600 text-center mt-4">
-      <a href="/" class="hover:underline">← Back to Home</a>
+    <div class="login-back-link">
+      <a href="/">← Back to Home</a>
     </div>
   </div>
 

@@ -4,46 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles/index.css">
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen font-sans">
+<body class="home-body">
 
-  <div class="bg-white p-10 rounded-xl shadow-lg text-center space-y-8 max-w-xl w-full">
-    <h1 class="text-3xl font-bold text-purple-700">Welcome 👋</h1>
+  <div class="home-container">
+    <h1 class="main-heading">Welcome 👋</h1>
 
-    
-    <div class="flex flex-col sm:flex-row sm:justify-center gap-4">
+    <div class="auth-buttons">
       <% if (!user) { %>
-        <a href="/create" class="bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
-          Admin Sign Up
-        </a>
-        <a href="/login" class="bg-purple-100 text-purple-700 py-2 px-4 rounded-lg hover:bg-purple-200 transition">
-          Admin Login
-        </a>
+        <a href="/create" class="btn btn-primary">Admin Sign Up</a>
+        <a href="/login" class="btn btn-secondary">Admin Login</a>
       <% } else { %>
-        <a href="/dashboard" class="bg-blue-100 text-blue-700 py-2 px-4 rounded-lg hover:bg-blue-200 transition">
-          Go to Dashboard
-        </a>
+        <a href="/dashboard" class="btn btn-dashboard">Go to Dashboard</a>
         <form method="POST" action="/logout">
-          <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition">
-            Logout
-          </button>
+          <button class="btn btn-logout">Logout</button>
         </form>
       <% } %>
     </div>
 
-    
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4 text-gray-700">Available Feedback Forms</h2>
+    <div class="form-section">
+      <h2 class="section-heading">Available Feedback Forms</h2>
 
       <% if (forms.length === 0) { %>
-        <p class="text-gray-500">No forms available yet.</p>
+        <p class="no-forms">No forms available yet.</p>
       <% } else { %>
-        <ul class="space-y-3">
+        <ul class="form-list">
           <% forms.forEach(form => { %>
-            <li class="border rounded-lg p-4 flex justify-between items-center hover:shadow-md">
-              <span class="text-gray-800 font-medium"><%= form.title %></span>
-              <a href="/form/<%= form._id %>" class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Fill</a>
+            <li class="form-item">
+              <span class="form-title"><%= form.title %></span>
+              <a href="/form/<%= form._id %>" class="btn btn-fill">Fill</a>
             </li>
           <% }) %>
         </ul>

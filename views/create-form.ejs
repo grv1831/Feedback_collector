@@ -5,35 +5,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Feedback Form</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles/create-form.css" />
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="body">
 
-  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-3xl">
-    <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Create Feedback Form</h2>
+  <div class="container">
+    <h2 class="title">Create Feedback Form</h2>
 
-    <form action="/create-form" method="POST" class="space-y-6">
+    <form action="/create-form" method="POST" class="form">
 
 
       <div>
-        <label class="block text-lg font-medium mb-2">Form Title</label>
-        <input type="text" name="title" required
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <label class="label">Form Title</label>
+        <input type="text" name="title" required class="input">
       </div>
 
+      <div id="questions-container" class="questions-container">
 
-      <div id="questions-container" class="space-y-8">
+        <div class="question-block">
+          <button type="button" onclick="deleteQuestion(this)" class="delete-btn">🗑️ Delete</button>
+          <label class="question-label">Question 1</label>
+          <input type="text" name="questions[]" required placeholder="Write your question" class="input">
 
-        <div class="question-block p-4 bg-gray-50 rounded-lg border space-y-3 relative">
-          <button type="button" onclick="deleteQuestion(this)"
-            class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-sm">🗑️ Delete</button>
-          <label class="block text-md font-semibold">Question 1</label>
-          <input type="text" name="questions[]" required placeholder="Write your question"
-            class="w-full p-2 border rounded-lg">
-
-          <label class="block text-sm font-medium">Type</label>
-          <select name="types[]" class="w-full p-2 border rounded-lg question-type" onchange="handleTypeChange(this)">
+          <label class="type-label">Type</label>
+          <select name="types[]" class="select question-type" onchange="handleTypeChange(this)">
             <option value="short">Short Text</option>
             <option value="long">Long Text</option>
             <option value="mcq">Multiple Choice</option>
@@ -41,34 +37,28 @@
             <option value="yesno">Yes/No</option>
           </select>
 
-          <div class="mcq-options hidden mt-3">
-            <label class="block text-sm mb-1">Enter options (comma separated)</label>
-            <input type="text" name="options[]" placeholder="e.g., Excellent, Good, Average, Poor"
-              class="w-full p-2 border rounded-lg">
+          <div class="mcq-options hidden">
+            <label class="options-label">Enter options (comma separated)</label>
+            <input type="text" name="options[]" placeholder="e.g., Excellent, Good, Average, Poor" class="input">
           </div>
         </div>
       </div>
 
-
-      <div class="text-center">
-        <button type="button" onclick="addQuestion()"
-          class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">
+      <div class="center">
+        <button type="button" onclick="addQuestion()" class="add-btn">
           ➕ Add Question
         </button>
       </div>
 
-
-      <button type="submit"
-        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+      <button type="submit" class="submit-btn">
         🚀 Create Form
       </button>
     </form>
 
-    <div class="mt-6 text-center">
-      <a href="/dashboard" class="text-blue-500 hover:underline">← Back to Dashboard</a>
+    <div class="footer">
+      <a href="/dashboard" class="link">← Back to Dashboard</a>
     </div>
   </div>
-
 
   <script>
     function handleTypeChange(select) {
@@ -85,23 +75,23 @@
       const container = document.getElementById("questions-container");
 
       const block = document.createElement("div");
-      block.className = "question-block p-4 bg-gray-50 rounded-lg border space-y-3 relative";
+      block.className = "question-block";
 
       block.innerHTML = `
-        <button type="button" onclick="deleteQuestion(this)" class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-sm">🗑️ Delete</button>
-        <label class="block text-md font-semibold">Question</label>
-        <input type="text" name="questions[]" required placeholder="Write your question" class="w-full p-2 border rounded-lg">
-        <label class="block text-sm font-medium">Type</label>
-        <select name="types[]" class="w-full p-2 border rounded-lg question-type" onchange="handleTypeChange(this)">
+        <button type="button" onclick="deleteQuestion(this)" class="delete-btn">🗑️ Delete</button>
+        <label class="question-label">Question</label>
+        <input type="text" name="questions[]" required placeholder="Write your question" class="input">
+        <label class="type-label">Type</label>
+        <select name="types[]" class="select question-type" onchange="handleTypeChange(this)">
           <option value="short">Short Text</option>
           <option value="long">Long Text</option>
           <option value="mcq">Multiple Choice</option>
           <option value="rating">Rating (1–5)</option>
           <option value="yesno">Yes/No</option>
         </select>
-        <div class="mcq-options hidden mt-3">
-          <label class="block text-sm mb-1">Enter options (comma separated)</label>
-          <input type="text" name="options[]" placeholder="e.g., Yes, No, Maybe" class="w-full p-2 border rounded-lg">
+        <div class="mcq-options hidden">
+          <label class="options-label">Enter options (comma separated)</label>
+          <input type="text" name="options[]" placeholder="e.g., Yes, No, Maybe" class="input">
         </div>
       `;
 
@@ -118,7 +108,7 @@
     function renumberQuestions() {
       const questionBlocks = document.querySelectorAll('.question-block');
       questionBlocks.forEach((block, index) => {
-        const label = block.querySelector('label');
+        const label = block.querySelector('.question-label');
         if (label) {
           label.textContent = `Question ${index + 1}`;
         }

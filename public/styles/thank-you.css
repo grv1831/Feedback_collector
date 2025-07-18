@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.thankyou-container h1 {
+  font-size: 2rem;
+  color: green;
+}
+
+.thankyou-container p {
+  font-size: 1rem;
+  color: #333;
+}
