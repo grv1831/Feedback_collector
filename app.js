@@ -1,4 +1,14 @@
-require("dotenv").config();
+require('dotenv').config();
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("MongoDB connected!");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -215,4 +225,7 @@ app.post("/form/:id/edit", verifyToken, async (req, res) => {
 });
 
 
-app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
