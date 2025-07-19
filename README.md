@@ -17,7 +17,7 @@ UI for form submit
 🚀 Features
 👤 Admin
 Signup / Login (JWT Authentication)
-Create feedback forms with multiple question types:
+Create feedback forms with multiple question types
 Edit existing forms (add/remove questions)
 View responses in:
   Tabular format (per submission)
