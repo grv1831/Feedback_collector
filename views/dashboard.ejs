@@ -37,6 +37,9 @@
                 <button onclick="copyToClipboard('<%= `http://localhost:3000/form/${form._id}` %>')" class="btn btn-light-gray">
                   Copy Link
                 </button>
+                <form method="POST" action="/form/<%= form._id %>/delete" onsubmit="return confirm('Are you sure you want to delete this form?');" style="display:inline;">
+                  <button type="submit" class="btn btn-red">Delete</button>
+                </form>
               </div>
             </div>
           </li>

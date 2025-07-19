@@ -176,17 +176,18 @@ app.post("/logout", (req, res) => {
 
 
 app.post("/create-form", verifyToken, async (req, res) => {
-  const { title, questions } = req.body;
-  const parsedQuestions = Array.isArray(questions) ? questions : [questions];
+  const { title, questions, types, options } = req.body;
 
-  await Form.create({
-    title,
-    questions: parsedQuestions,
-    adminEmail: req.user.email
-  });
+  const qs = questions.map((text, i) => ({
+    text,
+    type: types[i],
+    options: options[i] || ""
+  }));
 
+  await Form.create({ title, questions: qs, adminEmail: req.user.email });
   res.redirect("/dashboard");
 });
+
 
 app.post("/form/:id", async (req, res) => {
   const { answers } = req.body;
@@ -213,6 +214,17 @@ app.post("/form/:id/edit", verifyToken, async (req, res) => {
 
   res.redirect("/dashboard");
 });
+
+app.post('/form/:id/delete', async (req, res) => {
+  try {
+    await Form.findByIdAndDelete(req.params.id);
+    await Response.deleteMany({ formId: req.params.id });
+    res.redirect('/dashboard');
+  } catch (err) {
+    res.status(500).send("Error deleting form");
+  }
+});
+
 
 
 const PORT = process.env.PORT || 3000;

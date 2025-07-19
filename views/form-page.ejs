@@ -21,14 +21,47 @@
     <form action="/form/<%= form._id %>" method="POST" class="form-body">
       <% form.questions.forEach((q, index) => { %>
         <div class="question-block">
-          <label><%= q %></label>
-          <input type="text" name="answers[]" required />
+          <label><strong>Q<%= index + 1 %>:</strong> <%= q.text %></label>
+
+          <% if (q.type === 'short') { %>
+            <input type="text" name="answers[<%= index %>]" required />
+
+          <% } else if (q.type === 'long') { %>
+            <textarea name="answers[<%= index %>]" rows="4" required></textarea>
+
+          <% } else if (q.type === 'mcq') { 
+            const options = q.options ? q.options.split(',') : [];
+          %>
+            <% options.forEach(opt => { %>
+              <label>
+                <input type="radio" name="answers[<%= index %>]" value="<%= opt.trim() %>" required>
+                <%= opt.trim() %>
+              </label><br>
+            <% }) %>
+
+          <% } else if (q.type === 'rating') { 
+            const options = q.options ? q.options.split(',') : ['1','2','3','4','5'];
+          %>
+            <% options.forEach(opt => { %>
+              <label>
+                <input type="radio" name="answers[<%= index %>]" value="<%= opt.trim() %>" required>
+                <%= opt.trim() %>
+              </label><br>
+            <% }) %>
+
+          <% } else if (q.type === 'yesno') { %>
+            <label>
+              <input type="radio" name="answers[<%= index %>]" value="Yes" required> Yes
+            </label>
+            <label>
+              <input type="radio" name="answers[<%= index %>]" value="No" required> No
+            </label>
+
+          <% } %>
         </div>
       <% }) %>
 
-      <button type="submit" class="submit-btn">
-        Submit Feedback
-      </button>
+      <button type="submit" class="submit-btn">Submit Feedback</button>
     </form>
   </div>
 
